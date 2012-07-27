@@ -9,9 +9,9 @@
 	<url>https://github.com/dgrandemange/slf4j-logback4jpos</url>
 
 	<scm>
-		<developerConnection>scm:git:ssh://git@github.com:dgrandemange/slf4j-logback4jpos.git</developerConnection>
-		<connection>scm:git:ssh://git@github.com:dgrandemange/slf4j-logback4jpos.git</connection>
-		<url>scm:git:ssh://git@github.com:dgrandemange/slf4j-logback4jpos.git</url>
+		<developerConnection>scm:git:ssh://git@github.com/dgrandemange/slf4j-logback4jpos.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com/dgrandemange/slf4j-logback4jpos.git</connection>
+		<url>scm:git:ssh://git@github.com/dgrandemange/slf4j-logback4jpos.git</url>
 	</scm>  
   
 	<distributionManagement>
