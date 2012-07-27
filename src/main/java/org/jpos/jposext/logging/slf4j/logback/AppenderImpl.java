@@ -16,6 +16,7 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.LoggingEventVO;
+import ch.qos.logback.classic.spi.ThrowableProxy;
 import ch.qos.logback.classic.spi.ThrowableProxyUtil;
 import ch.qos.logback.core.AppenderBase;
 import ch.qos.logback.core.LogbackException;
@@ -71,12 +72,28 @@ public class AppenderImpl extends AppenderBase<ILoggingEvent> {
 
 		// Handle exceptions
 		IThrowableProxy tp = event.getThrowableProxy();
-		if (tp != null) {
-			jposLogEvent.addMessage(ThrowableProxyUtil.asString(tp));
-		}
+		handleThrowableProxy(jposLogEvent, tp);
 
 		// Do the actual logging
 		Logger.log(jposLogEvent);
+	}
+
+	protected void handleThrowableProxy(final LogEvent jposLogEvent,
+			IThrowableProxy tp) {
+		boolean handled = false;
+		if (tp != null) {
+			if (tp instanceof ThrowableProxy) {
+				Throwable t = ((ThrowableProxy) tp).getThrowable();
+				if (t instanceof Loggeable) {
+					jposLogEvent.addMessage(t);
+					handled = true;
+				}
+			}
+		}
+		
+		if (!handled) {
+			jposLogEvent.addMessage(ThrowableProxyUtil.asString(tp));
+		}
 	}
 
 	protected void initDefaultEncoder() {

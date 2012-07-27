@@ -20,6 +20,8 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.classic.spi.ThrowableProxy;
+import ch.qos.logback.classic.spi.ThrowableProxyUtil;
 import ch.qos.logback.core.Context;
 
 /**
@@ -297,4 +299,24 @@ public class AppenderImplTest {
 						isomsg1, "part_fmted2", ex, "part_fmted3</MDC>");
 	}
 
+	@Test
+	public void testPopulateLogEvent__OneThrowableLoggeableOnly__Case() {
+		ISOException isoex = new ISOException();
+
+		apd.handleThrowableProxy(ev, new ThrowableProxy(isoex));
+
+		assertThat(payload).containsExactly(isoex);
+	}	
+
+	@Test
+	public void testPopulateLogEvent__OneThrowableNotLoggeableOnly__Case() {
+		Exception isoex = new Exception("dummy exception");
+
+		ThrowableProxy tp = new ThrowableProxy(isoex);
+		apd.handleThrowableProxy(ev, tp);
+
+		assertThat(payload).containsExactly(ThrowableProxyUtil.asString(tp));
+	}	
+	
+	
 }
