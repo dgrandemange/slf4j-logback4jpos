@@ -1,0 +1,16 @@
+<!-- jposapp logback configuration -->
+
+<configuration>
+
+	<!-- 'Q2' Appender -->
+	<appender name="Q2" class="org.jpos.jposext.logging.slf4j.logback.AppenderImpl">
+		<encoder>
+			<pattern><![CDATA[<meta thread='%thread' logger='%logger{0}' txId='%X{jposTransactionId}'/>]]>%n%msg</pattern>
+		</encoder>	
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="Q2" />
+	</root>
+
+</configuration>

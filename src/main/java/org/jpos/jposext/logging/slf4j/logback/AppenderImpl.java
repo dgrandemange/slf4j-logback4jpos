@@ -70,10 +70,6 @@ public class AppenderImpl extends AppenderBase<ILoggingEvent> {
 		// Populate jPos log event from logback event
 		populateJPosLogEvent(event, jposLogEvent);
 
-		// Handle exceptions
-		IThrowableProxy tp = event.getThrowableProxy();
-		handleThrowableProxy(jposLogEvent, tp);
-
 		// Do the actual logging
 		Logger.log(jposLogEvent);
 	}
