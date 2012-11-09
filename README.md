@@ -29,15 +29,18 @@ Simply add the following snippet to your pom.xml :
         <!-- ... your project dependencies -->
     
         <dependency>
-			<groupId>org.jpos.jposext</groupId>
-			<artifactId>slf4j-logback4jpos</artifactId>
-			<version>1.0.1</version>        
+		<groupId>org.jpos.jposext</groupId>
+		<artifactId>slf4j-logback4jpos</artifactId>
+		<version>1.0.1</version>        
         </dependency>        
     </dependencies>
 
 Running the project demo :
 --------------------------
-First, 'mvn -Pdemo install'
-Then, under runtime directory 'java -jar q2.jar'
+First :
+> mvn -Pdemo install
+
+Then, under runtime directory :
+> java -jar q2.jar
+
 See class '/src/demo/java/org/jpos/jposext/logging/slf4j/logback/transaction/DemoParticipant.java' and logback configuration file '/src/demo/resources/cfg/logback.xml' for usage.
- 
